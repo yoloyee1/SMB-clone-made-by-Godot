@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dov2uhsxdajp0"]
+
+[ext_resource type="Script" path="res://char/player/doll/transition_doll.gd" id="1_4vr7e"]
+[ext_resource type="Texture2D" uid="uid://cwkipgv24gp7y" path="res://Mario1/Characters/Mario.png" id="1_qhe8i"]
+
+[node name="transition doll" type="Sprite2D"]
+texture = ExtResource("1_qhe8i")
+hframes = 26
+script = ExtResource("1_4vr7e")

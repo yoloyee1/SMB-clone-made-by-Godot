@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuew2rqduatx2"]
+
+[ext_resource type="Texture2D" uid="uid://dsbh7v7dh8o1y" path="res://Mario1/Misc/mario flag.png" id="1_ubj1w"]
+[ext_resource type="Texture2D" uid="uid://bq28jji4h5puj" path="res://NES - Super Mario Bros - World 1-1.png" id="2_cy5m6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uhhuf"]
+texture = ExtResource("1_ubj1w")
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_fp0ay"]
+sources/0 = SubResource("TileSetAtlasSource_uhhuf")
+
+[node name="flag" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(8, 8)
+tile_set = SubResource("TileSet_fp0ay")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65537, 0, 1, -131073, 0, 1, -196609, 0, 1, -262145, 0, 1, -327681, 0, 1, -393217, 0, 1, -458753, 0, 1, -524289, 0, 1, -589825, 0, 1, -655361, 0, 0)
+
+[node name="Nes-SuperMarioBros-World1-1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1488, 40)
+texture = ExtResource("2_cy5m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -144)
+texture = ExtResource("1_ubj1w")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy08sbyrqarhy"]
+
+[ext_resource type="PackedScene" uid="uid://cvlnv64i5kalw" path="res://levels/universal/blocks/basic_block.tscn" id="1_xv463"]
+
+[node name="coin block" instance=ExtResource("1_xv463")]
+store_coin = 1
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 4
+region_rect = Rect2(64, 0, 16, 16)
+
+[node name="UnderGroundSprite2D" parent="." index="1"]
+frame = 4

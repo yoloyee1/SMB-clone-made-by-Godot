@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://clauaa142gxih"]
+
+[ext_resource type="PackedScene" uid="uid://caba22ef0o8op" path="res://char/enemys/enemy.tscn" id="1_kii25"]
+[ext_resource type="Texture2D" uid="uid://reb3ix8fxxk1" path="res://Mario1/Characters/Enemies.png" id="2_hatee"]
+[ext_resource type="Script" path="res://char/enemys/turtles/green/green_turtle.gd" id="2_yvmvd"]
+[ext_resource type="PackedScene" uid="uid://bewfpyn44l4e2" path="res://char/enemys/base_shell.tscn" id="3_0gjwc"]
+
+[sub_resource type="Animation" id="Animation_tm51t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_xjwc5"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("graphic/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqmjj"]
+_data = {
+"RESET": SubResource("Animation_tm51t"),
+"walk": SubResource("Animation_xjwc5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_voihr"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hhm6n"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ywjf"]
+size = Vector2(16, 16)
+
+[node name="green turtle" instance=ExtResource("1_kii25")]
+script = ExtResource("2_yvmvd")
+shell = ExtResource("3_0gjwc")
+
+[node name="AnimationPlayer" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_bqmjj")
+}
+autoplay = "walk"
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_voihr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_checker" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_hhm6n")
+
+[node name="Sprite2D" parent="graphic" index="0"]
+position = Vector2(0, -6)
+texture = ExtResource("2_hatee")
+hframes = 4
+region_enabled = true
+region_rect = Rect2(96, 0, 128, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead checker" index="0"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_8ywjf")

@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://7wbs41pawh7g"]
+
+[ext_resource type="Script" path="res://char/player/fire/fire.gd" id="1_8abwf"]
+[ext_resource type="Texture2D" uid="uid://bqq6xojglmpay" path="res://Mario1/Characters/fire.png" id="1_jos5f"]
+[ext_resource type="PackedScene" uid="uid://beorwjlkqutvm" path="res://effect/explosion/explosion.tscn" id="2_wxpff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axebq"]
+atlas = ExtResource("1_jos5f")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j16c3"]
+atlas = ExtResource("1_jos5f")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aon0n"]
+atlas = ExtResource("1_jos5f")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5u2n"]
+atlas = ExtResource("1_jos5f")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pev03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axebq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j16c3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aon0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5u2n")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_juqat"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t7wn0"]
+radius = 5.0
+
+[node name="fire" type="CharacterBody2D"]
+collision_layer = 32
+script = ExtResource("1_8abwf")
+explosion = ExtResource("2_wxpff")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pev03")
+autoplay = "default"
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_juqat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_t7wn0")
+
+[node name="wall checker" type="RayCast2D" parent="."]
+target_position = Vector2(6, 0)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

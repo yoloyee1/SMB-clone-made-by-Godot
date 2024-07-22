@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkevp2vyrbuc2"]
+
+[ext_resource type="PackedScene" uid="uid://4jeis84whbd3" path="res://levels/universal/power up/item.tscn" id="1_g1o5u"]
+[ext_resource type="Texture2D" uid="uid://boqckqrb3fcbp" path="res://Mario1/Misc/Items.png" id="2_1f6le"]
+
+[node name="star" instance=ExtResource("1_g1o5u")]
+what_type_is_it = 2
+need_moving = false
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1f6le")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)

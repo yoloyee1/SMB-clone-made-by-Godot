@@ -1,0 +1,155 @@
+[gd_scene load_steps=19 format=3 uid="uid://cvlnv64i5kalw"]
+
+[ext_resource type="Script" path="res://levels/universal/blocks/basic_block.gd" id="1_gluth"]
+[ext_resource type="Texture2D" uid="uid://db03ygg1djvuh" path="res://Mario1/Tilesets/OverWorld.png" id="1_i52f8"]
+[ext_resource type="PackedScene" uid="uid://dwvd3oyc62cyc" path="res://levels/universal/coin/coin.tscn" id="2_7j48p"]
+[ext_resource type="PackedScene" uid="uid://caugcgj6ygngs" path="res://levels/universal/blocks/particle/block_particles.tscn" id="3_26dlv"]
+[ext_resource type="PackedScene" uid="uid://clf28lg75d28r" path="res://levels/universal/power up/mushroom/mushroom.tscn" id="3_on3xl"]
+[ext_resource type="PackedScene" uid="uid://cswrioff8ns1q" path="res://levels/universal/power up/flower/flower.tscn" id="4_6c2rn"]
+[ext_resource type="PackedScene" uid="uid://dcmt6m2110gtq" path="res://levels/universal/power up/1up/1_up.tscn" id="5_0lsp1"]
+[ext_resource type="PackedScene" uid="uid://bkevp2vyrbuc2" path="res://levels/universal/power up/star/star.tscn" id="6_r5lhw"]
+[ext_resource type="Shader" path="res://levels/universal/blocks/block.gdshader" id="8_lj7gw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lj37j"]
+shader = ExtResource("8_lj7gw")
+shader_parameter/onoff = 0.0
+shader_parameter/original_0 = null
+shader_parameter/original_1 = null
+shader_parameter/original_2 = null
+shader_parameter/original_3 = null
+shader_parameter/original_4 = null
+shader_parameter/replace_0 = null
+shader_parameter/replace_1 = null
+shader_parameter/replace_2 = null
+shader_parameter/replace_3 = null
+shader_parameter/replace_4 = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3kla"]
+shader = ExtResource("8_lj7gw")
+shader_parameter/onoff = 0.0
+shader_parameter/original_0 = Color(0, 0, 0, 1)
+shader_parameter/original_1 = Color(0.572549, 0.290196, 0.133333, 1)
+shader_parameter/original_2 = Color(0.65098, 0.384314, 0.141176, 1)
+shader_parameter/original_3 = Color(0.756863, 0.47451, 0.215686, 1)
+shader_parameter/original_4 = Color(0.890196, 0.752941, 0.533333, 1)
+shader_parameter/replace_0 = null
+shader_parameter/replace_1 = Color(0.0313726, 0.352941, 0.45098, 1)
+shader_parameter/replace_2 = Color(0.192157, 0.517647, 0.611765, 1)
+shader_parameter/replace_3 = Color(0.352941, 0.678431, 0.776471, 1)
+shader_parameter/replace_4 = Color(0.517647, 0.839216, 0.937255, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_te6j0"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yx3n"]
+size = Vector2(14, 1)
+
+[sub_resource type="Animation" id="Animation_y5klt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_72rlk"]
+resource_name = "bounce"
+length = 0.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.13),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eygm4"]
+_data = {
+"RESET": SubResource("Animation_y5klt"),
+"bounce": SubResource("Animation_72rlk")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qf4br"]
+size = Vector2(16, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_44nsf"]
+size = Vector2(8, 8)
+
+[node name="basic block" type="StaticBody2D"]
+z_index = 1
+material = SubResource("ShaderMaterial_lj37j")
+collision_mask = 0
+script = ExtResource("1_gluth")
+coin = ExtResource("2_7j48p")
+mushroom = ExtResource("3_on3xl")
+flower = ExtResource("4_6c2rn")
+one_up = ExtResource("5_0lsp1")
+star = ExtResource("6_r5lhw")
+particle = ExtResource("3_26dlv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_t3kla")
+texture = ExtResource("1_i52f8")
+hframes = 8
+vframes = 8
+frame = 3
+region_rect = Rect2(48, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_te6j0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_0yx3n")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eygm4")
+}
+
+[node name="item checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item checker"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_qf4br")
+
+[node name="enemy checker" type="Area2D" parent="."]
+position = Vector2(0, -9)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy checker"]
+shape = SubResource("RectangleShape2D_qf4br")
+
+[node name="coin checker" type="Area2D" parent="."]
+position = Vector2(0, -16)
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="coin checker"]
+shape = SubResource("RectangleShape2D_44nsf")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="item checker" to="." method="_on_item_checker_body_entered"]
+[connection signal="body_exited" from="item checker" to="." method="_on_item_checker_body_exited"]
+[connection signal="body_entered" from="enemy checker" to="." method="_on_enemy_checker_body_entered"]
+[connection signal="body_exited" from="enemy checker" to="." method="_on_enemy_checker_body_exited"]

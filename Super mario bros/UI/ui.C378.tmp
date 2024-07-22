@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://xo3qf07u46p1"]
+
+[ext_resource type="Script" path="res://UI/ui.gd" id="1_48qqa"]
+[ext_resource type="LabelSettings" uid="uid://c5glgor6djob" path="res://font/8PX.tres" id="1_ch3c1"]
+
+[node name="ui" type="CanvasLayer"]
+script = ExtResource("1_48qqa")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.108
+offset_left = 24.0
+offset_right = -24.0
+offset_bottom = -1.92
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="score" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/score"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "SCORE
+"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="score num" type="Label" parent="Control/HBoxContainer/score"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+text = "000000"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="coin" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/coin"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "COIN"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="coin num" type="Label" parent="Control/HBoxContainer/coin"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "00"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="world" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/world"]
+layout_mode = 2
+text = "WORLD"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="Label2" type="Label" parent="Control/HBoxContainer/world"]
+layout_mode = 2
+text = "1-1"
+label_settings = ExtResource("1_ch3c1")
+horizontal_alignment = 1
+
+[node name="time" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/time"]
+layout_mode = 2
+text = "TIME"
+label_settings = ExtResource("1_ch3c1")
+
+[node name="time num" type="Label" parent="Control/HBoxContainer/time"]
+layout_mode = 2
+text = "114514"
+label_settings = ExtResource("1_ch3c1")
+horizontal_alignment = 1

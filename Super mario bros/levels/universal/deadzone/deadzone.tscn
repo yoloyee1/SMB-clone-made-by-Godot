@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://xjxdw4ki0hg5"]
+
+[ext_resource type="Script" path="res://levels/universal/deadzone/deadzone.gd" id="1_41qtg"]
+[ext_resource type="Texture2D" uid="uid://bec4m2lopan1a" path="res://levels/universal/deadzone/skeleton.png" id="2_mk686"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4h2ta"]
+size = Vector2(16, 16)
+
+[node name="deadzone" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_41qtg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4h2ta")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mk686")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

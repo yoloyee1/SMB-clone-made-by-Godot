@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://caba22ef0o8op"]
+
+[ext_resource type="Script" path="res://char/enemys/enemy.gd" id="1_8wvdy"]
+[ext_resource type="PackedScene" uid="uid://um2o4hbq8e42" path="res://char/enemys/dead enemy/dead_enemy.tscn" id="2_jn7u2"]
+[ext_resource type="PackedScene" uid="uid://bob7yw7643ngx" path="res://effect/popup/popup.tscn" id="2_ok6l0"]
+
+[node name="enemy" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_8wvdy")
+popup = ExtResource("2_ok6l0")
+dead_doll = ExtResource("2_jn7u2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-40, -10, 80, 20)
+
+[node name="Player_checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="graphic" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="graphic"]
+
+[node name="RayCast2D" type="RayCast2D" parent="graphic"]
+target_position = Vector2(-10, 0)
+
+[node name="dead checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="Player_checker" to="." method="_on_player_checker_body_entered"]
+[connection signal="area_entered" from="dead checker" to="." method="_on_dead_checker_area_entered"]

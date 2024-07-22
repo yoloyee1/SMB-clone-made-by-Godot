@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwvd3oyc62cyc"]
+
+[ext_resource type="Texture2D" uid="uid://boqckqrb3fcbp" path="res://Mario1/Misc/Items.png" id="1_55ffy"]
+[ext_resource type="Script" path="res://levels/universal/coin/coin.gd" id="1_uk15e"]
+[ext_resource type="PackedScene" uid="uid://bob7yw7643ngx" path="res://effect/popup/popup.tscn" id="2_u2enk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxqnt"]
+size = Vector2(10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3a5s1"]
+atlas = ExtResource("1_55ffy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr1og"]
+atlas = ExtResource("1_55ffy")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu6rs"]
+atlas = ExtResource("1_55ffy")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6evu2"]
+atlas = ExtResource("1_55ffy")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5nuw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3a5s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr1og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu6rs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6evu2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_iqh08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lp2vk"]
+resource_name = "get"
+length = 0.3
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -64), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epsj3"]
+_data = {
+"RESET": SubResource("Animation_iqh08"),
+"get": SubResource("Animation_lp2vk")
+}
+
+[node name="coin" type="Area2D"]
+z_index = -1
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_uk15e")
+popup = ExtResource("2_u2enk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sxqnt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k5nuw")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_epsj3")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

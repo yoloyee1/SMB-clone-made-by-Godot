@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://um2o4hbq8e42"]
+
+[ext_resource type="Script" path="res://char/enemys/dead enemy/dead_enemy.gd" id="1_pwgou"]
+[ext_resource type="Texture2D" uid="uid://reb3ix8fxxk1" path="res://Mario1/Characters/Enemies.png" id="1_qpnjk"]
+
+[node name="dead enemy" type="CharacterBody2D"]
+script = ExtResource("1_pwgou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 16)
+scale = Vector2(1, -1)
+texture = ExtResource("1_qpnjk")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://4jeis84whbd3"]
+
+[ext_resource type="Script" path="res://levels/universal/power up/item.gd" id="1_dw0gm"]
+[ext_resource type="PackedScene" uid="uid://bob7yw7643ngx" path="res://effect/popup/popup.tscn" id="2_waqnr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfdrl"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ae3bx"]
+size = Vector2(16, 16)
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_qtvv8"]
+length = 10.0
+
+[node name="item" type="CharacterBody2D"]
+collision_layer = 8
+script = ExtResource("1_dw0gm")
+popup = ExtResource("2_waqnr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hfdrl")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ae3bx")
+
+[node name="wall checker" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall checker"]
+rotation = -1.5708
+shape = SubResource("SeparationRayShape2D_qtvv8")

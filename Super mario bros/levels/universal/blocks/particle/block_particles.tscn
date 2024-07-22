@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://caugcgj6ygngs"]
+
+[ext_resource type="Texture2D" uid="uid://dict30xpd4jct" path="res://levels/universal/blocks/particle/particle.png" id="1_aswlx"]
+[ext_resource type="Shader" path="res://levels/universal/blocks/block.gdshader" id="1_vuyuh"]
+[ext_resource type="Script" path="res://levels/universal/blocks/particle/block_particles.gd" id="2_ttt0c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1i7ga"]
+shader = ExtResource("1_vuyuh")
+shader_parameter/onoff = 0.0
+shader_parameter/original_0 = Color(0, 0, 0, 1)
+shader_parameter/original_1 = Color(0.572549, 0.290196, 0.133333, 1)
+shader_parameter/original_2 = Color(0.65098, 0.384314, 0.141176, 1)
+shader_parameter/original_3 = Color(0.756863, 0.47451, 0.215686, 1)
+shader_parameter/original_4 = Color(0.890196, 0.752941, 0.533333, 1)
+shader_parameter/replace_0 = null
+shader_parameter/replace_1 = Color(0.0313726, 0.352941, 0.45098, 1)
+shader_parameter/replace_2 = Color(0.192157, 0.517647, 0.611765, 1)
+shader_parameter/replace_3 = Color(0.352941, 0.678431, 0.776471, 1)
+shader_parameter/replace_4 = Color(0.517647, 0.839216, 0.937255, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_njwm8"]
+particle_flag_disable_z = true
+angle_min = 180.0
+angle_max = 180.0
+direction = Vector3(1, -1, 0)
+spread = 15.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 300, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kgta8"]
+shader = ExtResource("1_vuyuh")
+shader_parameter/onoff = 0.0
+shader_parameter/original_0 = null
+shader_parameter/original_1 = Color(0.572549, 0.290196, 0.133333, 1)
+shader_parameter/original_2 = Color(0.65098, 0.384314, 0.141176, 1)
+shader_parameter/original_3 = Color(0.756863, 0.47451, 0.215686, 1)
+shader_parameter/original_4 = Color(0.890196, 0.752941, 0.533333, 1)
+shader_parameter/replace_0 = null
+shader_parameter/replace_1 = Color(0.0313726, 0.352941, 0.45098, 1)
+shader_parameter/replace_2 = Color(0.192157, 0.517647, 0.611765, 1)
+shader_parameter/replace_3 = Color(0.352941, 0.678431, 0.776471, 1)
+shader_parameter/replace_4 = Color(0.517647, 0.839216, 0.937255, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lymij"]
+particle_flag_disable_z = true
+angle_min = 180.0
+angle_max = 180.0
+direction = Vector3(-1, -1, 0)
+spread = 15.0
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 300, 0)
+
+[node name="blockParticles" type="GPUParticles2D"]
+material = SubResource("ShaderMaterial_1i7ga")
+emitting = false
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_njwm8")
+texture = ExtResource("1_aswlx")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_ttt0c")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_kgta8")
+emitting = false
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_lymij")
+texture = ExtResource("1_aswlx")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="finished" from="." to="." method="_on_finished"]

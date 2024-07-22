@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bewfpyn44l4e2"]
+
+[ext_resource type="PackedScene" uid="uid://caba22ef0o8op" path="res://char/enemys/enemy.tscn" id="1_yomte"]
+[ext_resource type="Script" path="res://char/enemys/base_shell.gd" id="2_a5vao"]
+[ext_resource type="Texture2D" uid="uid://reb3ix8fxxk1" path="res://Mario1/Characters/Enemies.png" id="3_cl3ya"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npid2"]
+size = Vector2(16, 15)
+
+[node name="base shell" instance=ExtResource("1_yomte")]
+script = ExtResource("2_a5vao")
+speed = 200
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_npid2")
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+rect = Rect2(-80, -10, 160, 20)
+
+[node name="Player_checker" parent="." index="3"]
+position = Vector2(0, 2.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_checker" index="0"]
+shape = SubResource("RectangleShape2D_npid2")
+
+[node name="graphic" parent="." index="4"]
+position = Vector2(0, 2)
+
+[node name="Sprite2D" parent="graphic" index="0"]
+texture = ExtResource("3_cl3ya")
+region_enabled = true
+region_rect = Rect2(160, 16, 32, 16)
+
+[node name="dead checker" parent="." index="5"]
+position = Vector2(0, 2.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead checker" index="0"]
+shape = SubResource("RectangleShape2D_npid2")
+
+[node name="enemy checker" type="Area2D" parent="." index="6"]
+position = Vector2(0, 2.5)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy checker" index="0"]
+shape = SubResource("RectangleShape2D_npid2")
+
+[node name="prevent bug Timer" type="Timer" parent="." index="7"]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="enemy checker" to="." method="_on_enemy_checker_body_entered"]

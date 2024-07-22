@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://clf28lg75d28r"]
+
+[ext_resource type="PackedScene" uid="uid://4jeis84whbd3" path="res://levels/universal/power up/item.tscn" id="1_ilxu5"]
+[ext_resource type="Texture2D" uid="uid://boqckqrb3fcbp" path="res://Mario1/Misc/Items.png" id="1_kc5y1"]
+
+[node name="mushroom" instance=ExtResource("1_ilxu5")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("1_kc5y1")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

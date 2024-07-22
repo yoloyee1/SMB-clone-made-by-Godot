@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7cc6ac8iwryx"]
+
+[ext_resource type="PackedScene" uid="uid://cvlnv64i5kalw" path="res://levels/universal/blocks/basic_block.tscn" id="1_whgos"]
+
+[node name="power up block" instance=ExtResource("1_whgos")]
+has_item = true
+
+[node name="Sprite2D" parent="." index="0"]
+frame = 4

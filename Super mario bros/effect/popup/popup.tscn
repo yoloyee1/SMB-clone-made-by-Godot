@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bob7yw7643ngx"]
+
+[ext_resource type="LabelSettings" uid="uid://b0emdnp867rf6" path="res://font/popup.tres" id="1_vh7sc"]
+[ext_resource type="Script" path="res://effect/popup/popup.gd" id="2_hv5ah"]
+
+[node name="popup" type="Label"]
+z_index = 10
+offset_right = 20.0
+offset_bottom = 14.0
+size_flags_horizontal = 4
+text = "100"
+label_settings = ExtResource("1_vh7sc")
+script = ExtResource("2_hv5ah")
